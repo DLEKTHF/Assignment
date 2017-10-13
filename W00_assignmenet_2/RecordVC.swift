@@ -112,10 +112,6 @@ class RecordVC: UIViewController,UITextFieldDelegate  {
     if let safeAccountData = UserDefaults.standard.object(forKey: accountKey.accountData) as? [String] {
         self.accountData = safeAccountData
     }
-    print("bank ", self.bankData)
-    print("name ", self.nameData)
-    print("account ", self.accountData)
-
   }
   
   func saveData()  {

@@ -10,8 +10,7 @@ struct accountKey  {
   
 }
 class MainVC: UIViewController {
-  
-  
+    
  lazy  var bankData = [String]()
  lazy  var nameData = [String]()
  lazy  var accountData = [String]()
@@ -31,7 +30,6 @@ class MainVC: UIViewController {
     
   }
   
- 
   func retrieveData()  {
     
     if  let safeBankData = UserDefaults.standard.object(forKey: accountKey.bankData) as? [String] {
@@ -43,13 +41,8 @@ class MainVC: UIViewController {
     if let safeAccountData = UserDefaults.standard.object(forKey: accountKey.accountData) as? [String] {
       self.accountData = safeAccountData
     }
-    
-    print("bank ", self.bankData)
-    print("name ", self.nameData)
-    print("account ", self.accountData)
-    
-  }
-  
+}
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -88,9 +81,6 @@ extension MainVC:UITableViewDataSource,UITableViewDelegate  {
       recordVC.accountInfo = accountData[indexPath.row]
       
     }
-
   }
-  
-  
 }
 
