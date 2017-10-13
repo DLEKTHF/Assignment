@@ -56,20 +56,35 @@ class RecordVC: UIViewController,UITextFieldDelegate  {
   
   @IBAction func add(_ sender: Any) {
     
-    if didCheckValidate()  {
-      
-       bankData.append(bankTextField.text!)
-       nameData.append(nameTextField.text!)
-       accountData.append(accountTextField.text!)
-       saveData()
-       alertView(true)
-      
-    }else {
-       alertView(false)
+    if let idx = bankData.index(of:bankTextField.text!) {
+        
+        bankData.remove(at: idx)
+        nameData.remove(at: idx)
+        accountData.remove(at: idx)
+        
+        bankData.append(bankTextField.text!)
+        nameData.append(nameTextField.text!)
+        accountData.append(accountTextField.text!)
+        saveData()
+        
+        if didCheckValidate(){
+            alertView(true)
+        }else{
+            alertView(false)
+        }
+    }else{
+        bankData.append(bankTextField.text!)
+        nameData.append(nameTextField.text!)
+        accountData.append(accountTextField.text!)
+        saveData()
+        }
+        if didCheckValidate(){
+            alertView(true)
+        }else{
+        alertView(false)
+        }
     }
     
-  }
-  
   @IBAction func Delete(_ sender: Any) {
 
     if let idx = bankData.index(of:bankTextField.text!) {
@@ -168,6 +183,9 @@ extension RecordVC : UIPickerViewDataSource, UIPickerViewDelegate {
   
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
     bankTextField.text = pickOption[row]
+  }
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    self.view.endEditing(true)
   }
   
 }
