@@ -62,29 +62,27 @@ class RecordVC: UIViewController,UITextFieldDelegate  {
         nameData.remove(at: idx)
         accountData.remove(at: idx)
         
-        bankData.append(bankTextField.text!)
-        nameData.append(nameTextField.text!)
-        accountData.append(accountTextField.text!)
-        saveData()
-        
         if didCheckValidate(){
+            bankData.append(bankTextField.text!)
+            nameData.append(nameTextField.text!)
+            accountData.append(accountTextField.text!)
+            saveData()
             alertView(true)
         }else{
             alertView(false)
         }
     }else{
-        bankData.append(bankTextField.text!)
-        nameData.append(nameTextField.text!)
-        accountData.append(accountTextField.text!)
-        saveData()
-        }
         if didCheckValidate(){
+            bankData.append(bankTextField.text!)
+            nameData.append(nameTextField.text!)
+            accountData.append(accountTextField.text!)
+            saveData()
             alertView(true)
         }else{
-        alertView(false)
+            alertView(false)
         }
     }
-    
+}
   @IBAction func Delete(_ sender: Any) {
 
     if let idx = bankData.index(of:bankTextField.text!) {
