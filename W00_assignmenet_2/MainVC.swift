@@ -9,6 +9,7 @@ struct accountKey  {
   static let accountData = "AccountData"
   
 }
+
 class MainVC: UIViewController {
     
  lazy  var bankData = [String]()
@@ -29,8 +30,9 @@ class MainVC: UIViewController {
     tableView.reloadData()
     
   }
-  
-  func retrieveData()  {
+  // 저장을 하거나 수정을 했을 때 테이블뷰로 다시 돌아오면 테이블을 새로고침 (정보가 수정되어 보임)
+    
+    func retrieveData()  {
     
     if  let safeBankData = UserDefaults.standard.object(forKey: accountKey.bankData) as? [String] {
       self.bankData = safeBankData
@@ -64,10 +66,11 @@ extension MainVC:UITableViewDataSource,UITableViewDelegate  {
     return cell
     
   }
-  
+    
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
    performSegue(withIdentifier: "mainToRecord", sender: indexPath)
   }
+  //table view 설정
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     

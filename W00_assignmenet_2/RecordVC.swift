@@ -21,21 +21,11 @@ class RecordVC: UIViewController,UITextFieldDelegate  {
     lazy var nameData = [String]()
     lazy var accountData = [String]()
   
-    //데이터를 저장할수 있는 빈 집합을 만든다.
-  
-  func textFieldDidBeginEditing(_ textField: UITextField) {
-    
-    if textField == bankTextField{
-      pickerView.selectRow(0, inComponent: 0, animated: true)
-      bankTextField.text = pickOption[0]
-    }
-  }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
       
         return true
     }
-    //입력이 끝나고 키보드가 사라지게 하기위해 textField대신 Record가 키보드 처리하도록 한다.
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +41,8 @@ class RecordVC: UIViewController,UITextFieldDelegate  {
       }
       
       retrieveData()
-  }
+    }
+    //view가 넘어왔을 때
   
   
   @IBAction func add(_ sender: Any) {
@@ -71,6 +62,7 @@ class RecordVC: UIViewController,UITextFieldDelegate  {
         }else{
             alertView(false)
         }
+        
     }else{
         if didCheckValidate(){
             bankData.append(bankTextField.text!)
@@ -80,9 +72,11 @@ class RecordVC: UIViewController,UITextFieldDelegate  {
             alertView(true)
         }else{
             alertView(false)
+            }
         }
     }
-}
+    //내용추가
+    
   @IBAction func Delete(_ sender: Any) {
 
     if let idx = bankData.index(of:bankTextField.text!) {
@@ -92,14 +86,16 @@ class RecordVC: UIViewController,UITextFieldDelegate  {
         accountData.remove(at: idx)
         saveData()
         deletealertView(true)
-      
     }else {
         deletealertView(false)
+        }
     }
-}
+    //내용 삭제
+    
   func  didCheckValidate()  -> Bool   {
     return !bankTextField.text!.isEmpty && !nameTextField.text!.isEmpty && !accountTextField.text!.isEmpty
   }
+  //공백 확인
   
   func retrieveData()  {
 
@@ -113,7 +109,8 @@ class RecordVC: UIViewController,UITextFieldDelegate  {
         self.accountData = safeAccountData
     }
   }
-  
+  //저장한 값 인출
+    
   func saveData()  {
     
     UserDefaults.standard.set(bankData, forKey: accountKey.bankData)
@@ -121,7 +118,8 @@ class RecordVC: UIViewController,UITextFieldDelegate  {
     UserDefaults.standard.set(accountData, forKey: accountKey.accountData)
     
   }
-  
+  //입력 값 저장
+    
   func alertView(_ result:Bool)  {
     
     if result  {
@@ -141,8 +139,9 @@ class RecordVC: UIViewController,UITextFieldDelegate  {
       let action = UIAlertAction(title: "확인", style: UIAlertActionStyle.default)
       dialog.addAction(action)
       self.present(dialog, animated: true, completion: nil)
-    }
-  }
+      }
+   }
+   //저장 확인 알림창
     
     func deletealertView(_ result:Bool)  {
         
@@ -159,6 +158,7 @@ class RecordVC: UIViewController,UITextFieldDelegate  {
 
         }
     }
+    //삭제 확인 알림창
 }
 
 extension RecordVC : UIPickerViewDataSource, UIPickerViewDelegate {
@@ -180,6 +180,7 @@ extension RecordVC : UIPickerViewDataSource, UIPickerViewDelegate {
   }
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     self.view.endEditing(true)
-  }
-  
+    }
 }
+//custom picker 설정
+
